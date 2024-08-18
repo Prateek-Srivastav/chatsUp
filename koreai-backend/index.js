@@ -210,7 +210,7 @@ io.on("connection", (socket) => {
         senderId: msg.senderId === socket.userId ? "me" : msg.senderId,
         content: msg.content,
         mediaUrl: msg.mediaUrl,
-        mediaType: messages.mediaType,
+        mediaType: msg.mediaType,
         timestamp: msg.timestamp,
       }));
 
