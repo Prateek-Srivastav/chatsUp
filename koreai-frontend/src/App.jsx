@@ -1,5 +1,4 @@
-// src/App.jsx
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import io from "socket.io-client";
 import axios from "axios";
 import { LuSendHorizonal, LuSearch } from "react-icons/lu";
@@ -7,7 +6,7 @@ import { RiAttachment2 } from "react-icons/ri";
 
 import unknown_person from "./assets/Unknown_person.png";
 
-const socket = io("http://localhost:3000");
+const socket = io("https://koreai-backend.onrender.com");
 
 function App() {
   const [username, setUsername] = useState("");
@@ -112,7 +111,7 @@ function App() {
 
         try {
           const response = await axios.post(
-            "http://localhost:3000/upload",
+            "https://koreai-backend.onrender.com/upload",
             formData
           );
           mediaUrl = response.data.url;

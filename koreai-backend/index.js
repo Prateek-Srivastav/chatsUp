@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
@@ -19,8 +20,8 @@ const cors = require("cors");
 
 cloudinary.config({
   cloud_name: "dgmrmyrqk",
-  api_key: "549535688653922",
-  api_secret: "QCjIbFT_LnyKtIMxtc4Pg_UMNms",
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
 });
 
 const storage = new CloudinaryStorage({
@@ -37,7 +38,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://koreai-assignment.onrender.com",
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -46,14 +47,18 @@ app.use(
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://koreai-assignment.onrender.com",
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
 
 const pool = new Pool({
-  connectionString: "postgresql://postgres:admin@localhost:5432/chatdb",
+  connectionString: process.env.DB,
+  ssl: {
+    rejectUnauthorized: true,
+    ca: process.env.CA,
+  },
 });
 
 const db = drizzle(pool);
