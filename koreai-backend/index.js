@@ -38,7 +38,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://koreai-assignment.onrender.com",
+    origin: ["http://localhost:5173", "https://koreai-assignment.onrender.com"],
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -47,7 +47,7 @@ app.use(
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://koreai-assignment.onrender.com",
+    origin: ["http://localhost:5173", "https://koreai-assignment.onrender.com"],
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -55,10 +55,10 @@ const io = new Server(server, {
 
 const pool = new Pool({
   connectionString: process.env.DB,
-  ssl: {
-    rejectUnauthorized: false,
-    ca: process.env.CA,
-  },
+  // ssl: {
+  //   rejectUnauthorized: false,
+  //   ca: process.env.CA,
+  // },
 });
 
 const db = drizzle(pool);
@@ -167,6 +167,7 @@ io.on("connection", (socket) => {
           io.to(receiverSocket).emit("newMessage", {
             id: message.id,
             senderId: sender.id,
+            receiverId,
             content: message.content,
             mediaUrl: message.mediaUrl,
             mediaType: message.mediaType,
@@ -177,6 +178,7 @@ io.on("connection", (socket) => {
         socket.emit("newMessage", {
           id: message.id,
           senderId: "me",
+          receiverId,
           content: message.content,
           mediaUrl: message.mediaUrl,
           mediaType: message.mediaType,
