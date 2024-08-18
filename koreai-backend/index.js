@@ -56,7 +56,7 @@ const io = new Server(server, {
 const pool = new Pool({
   connectionString: process.env.DB,
   ssl: {
-    rejectUnauthorized: true,
+    rejectUnauthorized: false,
     ca: process.env.CA,
   },
 });
