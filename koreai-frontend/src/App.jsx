@@ -6,9 +6,9 @@ import { RiAttachment2 } from "react-icons/ri";
 
 import unknown_person from "./assets/Unknown_person.png";
 
-// const socket = io("https://koreai-backend.onrender.com");
+const socket = io("https://koreai-backend.onrender.com");
 
-const socket = io("http://localhost:3000");
+// const socket = io("http://localhost:3000");
 
 function App() {
   const [username, setUsername] = useState("");
