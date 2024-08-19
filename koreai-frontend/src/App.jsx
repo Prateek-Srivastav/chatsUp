@@ -7,11 +7,8 @@ import { RiAttachment2 } from "react-icons/ri";
 import unknown_person from "./assets/Unknown_person.png";
 
 const socket = io("https://koreai-backend.onrender.com");
-<<<<<<< HEAD
 
 // const socket = io("http://localhost:3000");
-=======
->>>>>>> parent of e15b73d (fixed a few bug appeared later)
 
 function App() {
   const [username, setUsername] = useState("");
@@ -38,11 +35,12 @@ function App() {
     socket.on("userList", updateUserList);
 
     socket.on("newMessage", (msg) => {
+      console.log("id", selectedUser);
       setChats((prevChats) => ({
         ...prevChats,
-        [msg.senderId]: [
-          ...(prevChats[msg.senderId] || []),
-          { ...msg, timestamp: new Date(msg.timestamp) },
+        [selectedUser.id]: [
+          ...(prevChats[selectedUser.id] || []),
+          { ...msg, timestamp: Date.now().toLocaleString() },
         ],
       }));
     });
@@ -82,7 +80,19 @@ function App() {
       socket.off("chatHistoryError");
       socket.off("userTyping");
     };
-  }, [updateUserList]);
+  }, [updateUserList, selectedUser]);
+
+  const chatEndRef = useRef(null);
+
+  // Function to scroll to the bottom
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Scroll to the bottom whenever messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [chats]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -291,6 +301,7 @@ function App() {
           ) : (
             <p className="text-black">Select a user to start chatting</p>
           )}
+          <div ref={chatEndRef} />
         </div>
         <form onSubmit={handleSendMessage} className="p-4 bg-white">
           <div className="flex flex-col">
