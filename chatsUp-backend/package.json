@@ -1,5 +1,5 @@
 {
-  "name": "koreai-backend",
+  "name": "chatsup-backend",
   "module": "index.js",
   "devDependencies": {
     "@types/bun": "latest"

@@ -38,7 +38,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://koreai-assignment.onrender.com",
+    origin: "https://chatsup.onrender.com",
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -47,7 +47,7 @@ app.use(
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://koreai-assignment.onrender.com",
+    origin: "https://chatsup.onrender.com",
     methods: ["GET", "POST"],
     credentials: true,
   },

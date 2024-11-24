@@ -6,7 +6,7 @@ import { RiAttachment2 } from "react-icons/ri";
 
 import unknown_person from "./assets/Unknown_person.png";
 
-const socket = io("https://koreai-backend.onrender.com");
+const socket = io("https://chatsup-backend.onrender.com");
 
 // const socket = io("http://localhost:3000");
 
@@ -126,7 +126,7 @@ function App() {
 
         try {
           const response = await axios.post(
-            "https://koreai-backend.onrender.com/upload",
+            "https://chatsup-backend.onrender.com/upload",
             formData
           );
           mediaUrl = response.data.url;
