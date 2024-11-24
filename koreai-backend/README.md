@@ -1,4 +1,4 @@
-# koreai-backend
+# chatsUp-backend
 
 To install dependencies:
 
